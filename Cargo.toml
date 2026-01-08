@@ -1,0 +1,11 @@
+[package]
+name = "protos-rust"
+version = "0.0.0-d87bf2d"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Protocol Buffer definitions for Harvest Hub"
+repository = "https://github.com/harvesthub-gardening-tool/protos-rust"
+
+[dependencies]
+prost = "0.13"
+tonic = "0.12"
