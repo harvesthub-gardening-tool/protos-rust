@@ -134,6 +134,8 @@ pub mod auth_service_client {
             req.extensions_mut().insert(GrpcMethod::new("auth.v1.AuthService", "Login"));
             self.inner.unary(req, path, codec).await
         }
+        /** Protected — valid user token required
+*/
         pub async fn create_hub_token(
             &mut self,
             request: impl tonic::IntoRequest<super::CreateHubTokenRequest>,
@@ -158,6 +160,7 @@ pub mod auth_service_client {
                 .insert(GrpcMethod::new("auth.v1.AuthService", "CreateHubToken"));
             self.inner.unary(req, path, codec).await
         }
+        ///
         pub async fn list_hub_tokens(
             &mut self,
             request: impl tonic::IntoRequest<super::ListHubTokensRequest>,
@@ -182,6 +185,7 @@ pub mod auth_service_client {
                 .insert(GrpcMethod::new("auth.v1.AuthService", "ListHubTokens"));
             self.inner.unary(req, path, codec).await
         }
+        ///
         pub async fn revoke_hub_token(
             &mut self,
             request: impl tonic::IntoRequest<super::RevokeHubTokenRequest>,
@@ -232,6 +236,8 @@ pub mod auth_service_server {
             &self,
             request: tonic::Request<super::LoginRequest>,
         ) -> std::result::Result<tonic::Response<super::LoginResponse>, tonic::Status>;
+        /** Protected — valid user token required
+*/
         async fn create_hub_token(
             &self,
             request: tonic::Request<super::CreateHubTokenRequest>,
@@ -239,6 +245,7 @@ pub mod auth_service_server {
             tonic::Response<super::CreateHubTokenResponse>,
             tonic::Status,
         >;
+        ///
         async fn list_hub_tokens(
             &self,
             request: tonic::Request<super::ListHubTokensRequest>,
@@ -246,6 +253,7 @@ pub mod auth_service_server {
             tonic::Response<super::ListHubTokensResponse>,
             tonic::Status,
         >;
+        ///
         async fn revoke_hub_token(
             &self,
             request: tonic::Request<super::RevokeHubTokenRequest>,
