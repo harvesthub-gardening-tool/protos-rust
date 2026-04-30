@@ -8,16 +8,22 @@ pub struct InsertSensorDataRequest {
     pub node_id: ::prost::alloc::string::String,
     /// Celsius
     #[prost(double, tag="2")]
-    pub temperature: f64,
+    pub air_temperature: f64,
     /// Percent (0-100)
     #[prost(double, tag="3")]
-    pub humidity: f64,
+    pub air_humidity: f64,
     /// Percent (0-100)
     #[prost(double, tag="4")]
-    pub soil_moisture: f64,
+    pub soil_humidity: f64,
     /// Unix milliseconds
     #[prost(int64, tag="5")]
     pub timestamp: i64,
+    /// Pascals
+    #[prost(double, tag="6")]
+    pub air_pressure: f64,
+    /// Celsius
+    #[prost(double, tag="7")]
+    pub soil_temperature: f64,
 }
 #[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct InsertSensorDataResponse {
@@ -50,18 +56,27 @@ pub struct SensorSummary {
     /// Unix milliseconds
     #[prost(int64, tag="2")]
     pub interval_start: i64,
+    /// Celsius
     #[prost(double, tag="3")]
-    pub avg_temperature: f64,
+    pub avg_air_temperature: f64,
+    /// Percent (0-100)
     #[prost(double, tag="4")]
-    pub avg_humidity: f64,
+    pub avg_air_humidity: f64,
+    /// Percent (0-100)
     #[prost(double, tag="5")]
-    pub avg_soil_moisture: f64,
+    pub avg_soil_humidity: f64,
     /// Celsius
     #[prost(double, tag="6")]
-    pub max_temperature: f64,
+    pub max_air_temperature: f64,
     /// ID of the hub that owns the probe (matches `hubs.id`).
     #[prost(string, tag="7")]
     pub hub_id: ::prost::alloc::string::String,
+    /// Pascals
+    #[prost(double, tag="8")]
+    pub avg_air_pressure: f64,
+    /// Celsius
+    #[prost(double, tag="9")]
+    pub avg_soil_temperature: f64,
 }
 include!("garden.v2.tonic.rs");
 // @@protoc_insertion_point(module)
