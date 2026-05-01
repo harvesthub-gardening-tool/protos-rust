@@ -78,5 +78,22 @@ pub struct SensorSummary {
     #[prost(double, tag="9")]
     pub avg_soil_temperature: f64,
 }
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct ListProbesForHubNameRequest {
+    /// Human-readable hub name (matched against the hub_name set during AssociateHub).
+    #[prost(string, tag="1")]
+    pub hub_name: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct ProbeInfo {
+    /// Probe identifier (BLE MAC or stable hardware ID).
+    #[prost(string, tag="1")]
+    pub node_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct ListProbesForHubNameResponse {
+    #[prost(message, repeated, tag="1")]
+    pub probes: ::prost::alloc::vec::Vec<ProbeInfo>,
+}
 include!("garden.v2.tonic.rs");
 // @@protoc_insertion_point(module)
