@@ -95,5 +95,40 @@ pub struct ListProbesForHubNameResponse {
     #[prost(message, repeated, tag="1")]
     pub probes: ::prost::alloc::vec::Vec<ProbeInfo>,
 }
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct SensorReading {
+    /// Probe identifier (BLE MAC or stable hardware ID).
+    #[prost(string, tag="1")]
+    pub node_id: ::prost::alloc::string::String,
+    /// Unix milliseconds of the reading timestamp.
+    #[prost(int64, tag="2")]
+    pub time: i64,
+    /// Celsius
+    #[prost(double, tag="3")]
+    pub air_temperature: f64,
+    /// Pascals
+    #[prost(double, tag="4")]
+    pub air_pressure: f64,
+    /// Percent (0-100)
+    #[prost(double, tag="5")]
+    pub air_humidity: f64,
+    /// Celsius
+    #[prost(double, tag="6")]
+    pub soil_temperature: f64,
+    /// Percent (0-100)
+    #[prost(double, tag="7")]
+    pub soil_humidity: f64,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct GetLastRequest {
+    /// Probe identifier (BLE MAC or stable hardware ID).
+    #[prost(string, tag="1")]
+    pub node_id: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, ::prost::Message)]
+pub struct GetLastResponse {
+    #[prost(message, optional, tag="1")]
+    pub reading: ::core::option::Option<SensorReading>,
+}
 include!("garden.v2.tonic.rs");
 // @@protoc_insertion_point(module)
