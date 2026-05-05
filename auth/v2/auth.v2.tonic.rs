@@ -114,6 +114,7 @@ pub mod auth_service_client {
                 .insert(GrpcMethod::new("auth.v2.AuthService", "Register"));
             self.inner.unary(req, path, codec).await
         }
+        ///
         pub async fn login(
             &mut self,
             request: impl tonic::IntoRequest<super::LoginRequest>,
@@ -236,6 +237,56 @@ pub mod auth_service_client {
                 .insert(GrpcMethod::new("auth.v2.AuthService", "RevokeHub"));
             self.inner.unary(req, path, codec).await
         }
+        ///
+        pub async fn change_email(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ChangeEmailRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ChangeEmailResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic_prost::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/auth.v2.AuthService/ChangeEmail",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("auth.v2.AuthService", "ChangeEmail"));
+            self.inner.unary(req, path, codec).await
+        }
+        ///
+        pub async fn change_password(
+            &mut self,
+            request: impl tonic::IntoRequest<super::ChangePasswordRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ChangePasswordResponse>,
+            tonic::Status,
+        > {
+            self.inner
+                .ready()
+                .await
+                .map_err(|e| {
+                    tonic::Status::unknown(
+                        format!("Service was not ready: {}", e.into()),
+                    )
+                })?;
+            let codec = tonic_prost::ProstCodec::default();
+            let path = http::uri::PathAndQuery::from_static(
+                "/auth.v2.AuthService/ChangePassword",
+            );
+            let mut req = request.into_request();
+            req.extensions_mut()
+                .insert(GrpcMethod::new("auth.v2.AuthService", "ChangePassword"));
+            self.inner.unary(req, path, codec).await
+        }
     }
 }
 /// Generated server implementations.
@@ -258,6 +309,7 @@ pub mod auth_service_server {
             tonic::Response<super::RegisterResponse>,
             tonic::Status,
         >;
+        ///
         async fn login(
             &self,
             request: tonic::Request<super::LoginRequest>,
@@ -294,6 +346,22 @@ pub mod auth_service_server {
             request: tonic::Request<super::RevokeHubRequest>,
         ) -> std::result::Result<
             tonic::Response<super::RevokeHubResponse>,
+            tonic::Status,
+        >;
+        ///
+        async fn change_email(
+            &self,
+            request: tonic::Request<super::ChangeEmailRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ChangeEmailResponse>,
+            tonic::Status,
+        >;
+        ///
+        async fn change_password(
+            &self,
+            request: tonic::Request<super::ChangePasswordRequest>,
+        ) -> std::result::Result<
+            tonic::Response<super::ChangePasswordResponse>,
             tonic::Status,
         >;
     }
@@ -626,6 +694,96 @@ pub mod auth_service_server {
                     let inner = self.inner.clone();
                     let fut = async move {
                         let method = RevokeHubSvc(inner);
+                        let codec = tonic_prost::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/auth.v2.AuthService/ChangeEmail" => {
+                    #[allow(non_camel_case_types)]
+                    struct ChangeEmailSvc<T: AuthService>(pub Arc<T>);
+                    impl<
+                        T: AuthService,
+                    > tonic::server::UnaryService<super::ChangeEmailRequest>
+                    for ChangeEmailSvc<T> {
+                        type Response = super::ChangeEmailResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ChangeEmailRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as AuthService>::change_email(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ChangeEmailSvc(inner);
+                        let codec = tonic_prost::ProstCodec::default();
+                        let mut grpc = tonic::server::Grpc::new(codec)
+                            .apply_compression_config(
+                                accept_compression_encodings,
+                                send_compression_encodings,
+                            )
+                            .apply_max_message_size_config(
+                                max_decoding_message_size,
+                                max_encoding_message_size,
+                            );
+                        let res = grpc.unary(method, req).await;
+                        Ok(res)
+                    };
+                    Box::pin(fut)
+                }
+                "/auth.v2.AuthService/ChangePassword" => {
+                    #[allow(non_camel_case_types)]
+                    struct ChangePasswordSvc<T: AuthService>(pub Arc<T>);
+                    impl<
+                        T: AuthService,
+                    > tonic::server::UnaryService<super::ChangePasswordRequest>
+                    for ChangePasswordSvc<T> {
+                        type Response = super::ChangePasswordResponse;
+                        type Future = BoxFuture<
+                            tonic::Response<Self::Response>,
+                            tonic::Status,
+                        >;
+                        fn call(
+                            &mut self,
+                            request: tonic::Request<super::ChangePasswordRequest>,
+                        ) -> Self::Future {
+                            let inner = Arc::clone(&self.0);
+                            let fut = async move {
+                                <T as AuthService>::change_password(&inner, request).await
+                            };
+                            Box::pin(fut)
+                        }
+                    }
+                    let accept_compression_encodings = self.accept_compression_encodings;
+                    let send_compression_encodings = self.send_compression_encodings;
+                    let max_decoding_message_size = self.max_decoding_message_size;
+                    let max_encoding_message_size = self.max_encoding_message_size;
+                    let inner = self.inner.clone();
+                    let fut = async move {
+                        let method = ChangePasswordSvc(inner);
                         let codec = tonic_prost::ProstCodec::default();
                         let mut grpc = tonic::server::Grpc::new(codec)
                             .apply_compression_config(

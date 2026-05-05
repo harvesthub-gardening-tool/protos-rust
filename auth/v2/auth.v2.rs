@@ -99,5 +99,27 @@ pub struct RevokeHubRequest {
 #[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
 pub struct RevokeHubResponse {
 }
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct ChangeEmailRequest {
+    #[prost(string, tag="1")]
+    pub new_email: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub current_password: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct ChangeEmailResponse {
+    #[prost(string, tag="1")]
+    pub token: ::prost::alloc::string::String,
+}
+#[derive(Clone, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct ChangePasswordRequest {
+    #[prost(string, tag="1")]
+    pub current_password: ::prost::alloc::string::String,
+    #[prost(string, tag="2")]
+    pub new_password: ::prost::alloc::string::String,
+}
+#[derive(Clone, Copy, PartialEq, Eq, Hash, ::prost::Message)]
+pub struct ChangePasswordResponse {
+}
 include!("auth.v2.tonic.rs");
 // @@protoc_insertion_point(module)

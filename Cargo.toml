@@ -1,6 +1,6 @@
 [package]
 name = "protos-rust"
-version = "0.0.0-165c462"
+version = "0.0.0-1f75675"
 edition = "2021"
 license = "MIT OR Apache-2.0"
 description = "Protocol Buffer definitions for Harvest Hub"
