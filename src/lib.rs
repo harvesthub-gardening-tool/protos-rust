@@ -6,6 +6,12 @@ pub mod auth {
     }
 }
 
+pub mod chat {
+    pub mod v1 {
+        include!("../chat/v1/chat.v1.rs");
+    }
+}
+
 pub mod control {
     pub mod v1 {
         include!("../control/v1/control.v1.rs");
